@@ -1,5 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf" class="app-layout">
+    <!-- Encabezado Principal -->
     <q-header elevated class="header-taller">
       <q-toolbar class="q-py-sm q-px-md">
         <div class="row items-center no-wrap">
@@ -16,6 +17,7 @@
 
         <q-space />
 
+        <!-- Buscador Global -->
         <div class="search-header-box q-mx-md">
           <q-input
             v-model="textoBusqueda"
@@ -35,6 +37,10 @@
         <q-space />
 
         <div class="row items-center q-gutter-sm">
+<<<<<<< HEAD
+=======
+          <!-- Botón Nuevo Servicio -->
+>>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
           <q-btn
             unelevated
             color="white"
@@ -50,6 +56,7 @@
 
     <q-page-container>
       <q-page class="page-content q-pa-md">
+        <!-- Tarjetas de Estadísticas Principales (Interactivas) -->
         <div class="row q-col-gutter-md q-mb-md">
           <div class="col-6 col-sm-3">
             <q-card
@@ -66,7 +73,11 @@
                 <div class="text-h5 text-weight-bolder text-primary q-mt-xs">
                   {{ stats.enTaller }}
                 </div>
+<<<<<<< HEAD
                 <div class="text-caption text-grey-6" style="font-size: 12.5px">
+=======
+                <div class="text-caption text-grey-6" style="font-size: 11px">
+>>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
                   Recibidos y en reparación
                 </div>
               </q-card-section>
@@ -88,7 +99,11 @@
                 <div class="text-h5 text-weight-bolder text-positive q-mt-xs">
                   {{ stats.listos }}
                 </div>
+<<<<<<< HEAD
                 <div class="text-caption text-grey-6" style="font-size: 12.5px">
+=======
+                <div class="text-caption text-grey-6" style="font-size: 11px">
+>>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
                   Esperando cliente
                 </div>
               </q-card-section>
@@ -110,7 +125,11 @@
                 <div class="text-h5 text-weight-bolder text-negative q-mt-xs">
                   {{ stats.conSaldoPendiente }}
                 </div>
+<<<<<<< HEAD
                 <div class="text-caption text-grey-6" style="font-size: 12.5px">
+=======
+                <div class="text-caption text-grey-6" style="font-size: 11px">
+>>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
                   Saldo fiado: ${{ formatearNumero(stats.totalSaldoPendiente) }}
                 </div>
               </q-card-section>
@@ -127,7 +146,11 @@
                 <div class="text-h5 text-weight-bolder text-teal-8 q-mt-xs">
                   ${{ formatearNumero(stats.totalRecaudado) }}
                 </div>
+<<<<<<< HEAD
                 <div class="text-caption text-grey-6" style="font-size: 12.5px">
+=======
+                <div class="text-caption text-grey-6" style="font-size: 11px">
+>>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
                   (Abonos: ${{ formatearNumero(stats.totalAbonado) }})
                 </div>
               </q-card-section>
@@ -364,9 +387,15 @@
                   <div
                     v-if="servicio.estadoPago !== 'pagado' && servicio.estadoEquipo !== 'entregado'"
                     class="text-negative text-caption text-weight-bold q-mt-xs bg-red-1 q-pa-xs rounded-borders"
+<<<<<<< HEAD
                     style="font-size: 12px"
                   >
                     <q-icon name="lock" size="13px" class="q-mr-xs" />
+=======
+                    style="font-size: 11px"
+                  >
+                    <q-icon name="lock" size="12px" class="q-mr-xs" />
+>>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
                     Entrega inhabilitada hasta cancelar saldo total
                   </div>
 
@@ -1024,7 +1053,11 @@ const formularioVacio = () => ({
   tipoReparacion: null,
   especificacionOtros: '',
   tecnico: 'Don Efraín',
+<<<<<<< HEAD
   fechaRecepcion: obtenerFechaHoraActual(),
+=======
+  fechaRecepcion: '',
+>>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
   precio: 0,
   metodoPago: 'Efectivo',
   estadoPago: 'pendiente',
@@ -1263,6 +1296,7 @@ function guardarServicio() {
       formulario.value.montoAbonado = 0
     }
 
+<<<<<<< HEAD
     if (!modoEdicion.value) {
       formulario.value.estadoEquipo = 'recibido'
     }
@@ -1270,6 +1304,10 @@ function guardarServicio() {
     const payload = {
       ...formulario.value,
       estadoEquipo: !modoEdicion.value ? 'recibido' : formulario.value.estadoEquipo,
+=======
+    const payload = {
+      ...formulario.value,
+>>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
       marca: marcaFinal,
       reparaciones: reparacionesFinales,
       cantidadReparaciones: reparacionesFinales.length,
@@ -1551,7 +1589,11 @@ function mostrarAviso(texto, tipo = 'exito') {
 
 .ribbon-card {
   letter-spacing: 0.5px;
+<<<<<<< HEAD
   font-size: 12.5px;
+=======
+  font-size: 11px;
+>>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
 }
 
 /* Mini Stepper de Etapas */
@@ -1577,12 +1619,21 @@ function mostrarAviso(texto, tipo = 'exito') {
 }
 
 .step-dot {
+<<<<<<< HEAD
   width: 24px;
   height: 24px;
   border-radius: 50%;
   background-color: #cbd5e1;
   color: #ffffff;
   font-size: 11.5px;
+=======
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #cbd5e1;
+  color: #ffffff;
+  font-size: 10px;
+>>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -1591,7 +1642,11 @@ function mostrarAviso(texto, tipo = 'exito') {
 }
 
 .step-label {
+<<<<<<< HEAD
   font-size: 11.5px;
+=======
+  font-size: 9.5px;
+>>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
   font-weight: 600;
   color: #64748b;
   white-space: nowrap;
@@ -1660,7 +1715,11 @@ function mostrarAviso(texto, tipo = 'exito') {
   border-radius: 50px;
   color: #ffffff;
   font-weight: 600;
+<<<<<<< HEAD
   font-size: 14.5px;
+=======
+  font-size: 13.5px;
+>>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
   letter-spacing: 0.2px;
 }
 
@@ -1685,4 +1744,8 @@ function mostrarAviso(texto, tipo = 'exito') {
 }
 
 
+<<<<<<< HEAD
 </style>
+=======
+</style>
+>>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
