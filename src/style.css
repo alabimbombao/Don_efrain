@@ -1,0 +1,47 @@
+/* Aumento global y armonioso de la tipografía para mejor legibilidad */
+html {
+  font-size: 15.5px;
+}
+
+body {
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Campos de formulario e inputs */
+.q-field__native,
+.q-field__input,
+.q-field__label {
+  font-size: 14.5px !important;
+}
+
+.q-field__bottom {
+  font-size: 12.5px !important;
+}
+
+/* Botones y dropdowns */
+.q-btn {
+  font-size: 14px;
+}
+
+/* Clases tipográficas auxiliares de Quasar */
+.text-caption {
+  font-size: 0.84rem !important;
+}
+
+.text-body2 {
+  font-size: 0.94rem !important;
+}
+
+.text-body1 {
+  font-size: 1.05rem !important;
+}
+
+.text-subtitle2 {
+  font-size: 0.96rem !important;
+}
+
+.text-subtitle1 {
+  font-size: 1.08rem !important;
+}
