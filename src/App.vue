@@ -37,10 +37,7 @@
         <q-space />
 
         <div class="row items-center q-gutter-sm">
-<<<<<<< HEAD
-=======
           <!-- Botón Nuevo Servicio -->
->>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
           <q-btn
             unelevated
             color="white"
@@ -73,11 +70,7 @@
                 <div class="text-h5 text-weight-bolder text-primary q-mt-xs">
                   {{ stats.enTaller }}
                 </div>
-<<<<<<< HEAD
-                <div class="text-caption text-grey-6" style="font-size: 12.5px">
-=======
                 <div class="text-caption text-grey-6" style="font-size: 11px">
->>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
                   Recibidos y en reparación
                 </div>
               </q-card-section>
@@ -99,11 +92,7 @@
                 <div class="text-h5 text-weight-bolder text-positive q-mt-xs">
                   {{ stats.listos }}
                 </div>
-<<<<<<< HEAD
-                <div class="text-caption text-grey-6" style="font-size: 12.5px">
-=======
                 <div class="text-caption text-grey-6" style="font-size: 11px">
->>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
                   Esperando cliente
                 </div>
               </q-card-section>
@@ -125,11 +114,7 @@
                 <div class="text-h5 text-weight-bolder text-negative q-mt-xs">
                   {{ stats.conSaldoPendiente }}
                 </div>
-<<<<<<< HEAD
-                <div class="text-caption text-grey-6" style="font-size: 12.5px">
-=======
                 <div class="text-caption text-grey-6" style="font-size: 11px">
->>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
                   Saldo fiado: ${{ formatearNumero(stats.totalSaldoPendiente) }}
                 </div>
               </q-card-section>
@@ -146,11 +131,7 @@
                 <div class="text-h5 text-weight-bolder text-teal-8 q-mt-xs">
                   ${{ formatearNumero(stats.totalRecaudado) }}
                 </div>
-<<<<<<< HEAD
-                <div class="text-caption text-grey-6" style="font-size: 12.5px">
-=======
                 <div class="text-caption text-grey-6" style="font-size: 11px">
->>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
                   (Abonos: ${{ formatearNumero(stats.totalAbonado) }})
                 </div>
               </q-card-section>
@@ -387,15 +368,9 @@
                   <div
                     v-if="servicio.estadoPago !== 'pagado' && servicio.estadoEquipo !== 'entregado'"
                     class="text-negative text-caption text-weight-bold q-mt-xs bg-red-1 q-pa-xs rounded-borders"
-<<<<<<< HEAD
-                    style="font-size: 12px"
-                  >
-                    <q-icon name="lock" size="13px" class="q-mr-xs" />
-=======
                     style="font-size: 11px"
                   >
                     <q-icon name="lock" size="12px" class="q-mr-xs" />
->>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
                     Entrega inhabilitada hasta cancelar saldo total
                   </div>
 
@@ -408,6 +383,7 @@
                       color="amber-8"
                       icon="star_border"
                       icon-selected="star"
+                      :readonly="servicio.calificacion > 0"
                       @update:model-value="guardarCambiosDirectos()"
                     />
                   </div>
@@ -605,25 +581,7 @@
                 />
               </div>
 
-              <!-- Pregunta obligatoria: ¿Cuántas reparaciones se van a hacer? -->
-              <div class="col-12 col-sm-6">
-                <q-select
-                  v-model="formulario.cantidadReparaciones"
-                  :options="opcionesCantidadReparaciones"
-                  label="¿Cuántas reparaciones se van a hacer? *"
-                  outlined
-                  dense
-                  bg-color="white"
-                  emit-value
-                  map-options
-                  :rules="[val => !!val && val >= 1 || 'Indica la cantidad']"
-                  @update:model-value="ajustarCantidadReparaciones"
-                >
-                  <template v-slot:prepend>
-                    <q-icon name="format_list_numbered" size="18px" color="primary" />
-                  </template>
-                </q-select>
-              </div>
+
 
               <div class="col-12 col-sm-6">
                 <q-select
@@ -661,44 +619,38 @@
             <div class="q-mt-sm bg-blue-50 q-pa-sm rounded-borders border-subtle">
               <div class="text-caption text-primary text-weight-bold q-mb-xs row items-center">
                 <q-icon name="build" size="15px" class="q-mr-xs" />
-                TIPOS DE REPARACIÓN A REALIZAR ({{ (formulario.reparaciones || []).length }})
+                TIPOS DE REPARACIÓN A REALIZAR ({{ (formulario.tiposReparacion || []).length }})
               </div>
               <div class="row q-col-gutter-sm">
-                <div
-                  v-for="(rep, index) in formulario.reparaciones"
-                  :key="index"
-                  class="col-12"
-                >
-                  <div class="row q-col-gutter-sm items-center">
-                    <div :class="rep.tipo === 'otros' ? 'col-12 col-sm-6' : 'col-12'">
-                      <q-select
-                        v-model="rep.tipo"
-                        :options="opcionesTipoReparacion"
-                        emit-value
-                        map-options
-                        :label="`Reparación #${index + 1} *`"
-                        outlined
-                        dense
-                        bg-color="white"
-                        :rules="[val => !!val || `Selecciona la reparación #${index + 1}`]"
-                      >
-                        <template v-slot:prepend>
-                          <q-icon :name="obtenerIconoReparacion(rep.tipo)" size="18px" color="primary" />
-                        </template>
-                      </q-select>
-                    </div>
-                    <div class="col-12 col-sm-6" v-if="rep.tipo === 'otros'">
-                      <q-input
-                        v-model="rep.especificacionOtros"
-                        :label="`Especificar reparación #${index + 1} (Otros) *`"
-                        outlined
-                        dense
-                        bg-color="white"
-                        placeholder="Ej: Cambio de cámara, botón..."
-                        :rules="[val => (val && val.trim().length > 0) || 'Especifica la reparación']"
-                      />
-                    </div>
-                  </div>
+                <div class="col-12">
+                  <q-select
+                    v-model="formulario.tiposReparacion"
+                    :options="opcionesTipoReparacion"
+                    emit-value
+                    map-options
+                    multiple
+                    use-chips
+                    label="Seleccione las reparaciones *"
+                    outlined
+                    dense
+                    bg-color="white"
+                    :rules="[val => val && val.length > 0 || 'Selecciona al menos una reparación']"
+                  >
+                    <template v-slot:prepend>
+                      <q-icon name="handyman" size="18px" color="primary" />
+                    </template>
+                  </q-select>
+                </div>
+                <div class="col-12" v-if="formulario.tiposReparacion && formulario.tiposReparacion.includes('otros')">
+                  <q-input
+                    v-model="formulario.especificacionOtros"
+                    label="Especificar reparación (Otros) *"
+                    outlined
+                    dense
+                    bg-color="white"
+                    placeholder="Ej: Cambio de cámara, botón..."
+                    :rules="[val => (val && val.trim().length > 0) || 'Especifica la reparación']"
+                  />
                 </div>
               </div>
             </div>
@@ -1046,18 +998,10 @@ const formularioVacio = () => ({
   marca: null,
   otraMarca: '',
   modelo: '',
-  cantidadReparaciones: 1,
-  reparaciones: [
-    { tipo: null, especificacionOtros: '' }
-  ],
-  tipoReparacion: null,
+  tiposReparacion: [],
   especificacionOtros: '',
   tecnico: 'Don Efraín',
-<<<<<<< HEAD
   fechaRecepcion: obtenerFechaHoraActual(),
-=======
-  fechaRecepcion: '',
->>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
   precio: 0,
   metodoPago: 'Efectivo',
   estadoPago: 'pendiente',
@@ -1167,18 +1111,7 @@ const totalFiltrado = computed(() => {
 
 // ================= GESTIÓN DINÁMICA DE REPARACIONES Y MARCAS =================
 
-function ajustarCantidadReparaciones(nuevaCantidad) {
-  const cant = Math.max(Number(nuevaCantidad) || 1, 1)
-  if (!formulario.value.reparaciones) {
-    formulario.value.reparaciones = []
-  }
-  while (formulario.value.reparaciones.length < cant) {
-    formulario.value.reparaciones.push({ tipo: null, especificacionOtros: '' })
-  }
-  if (formulario.value.reparaciones.length > cant) {
-    formulario.value.reparaciones = formulario.value.reparaciones.slice(0, cant)
-  }
-}
+
 
 function obtenerOpcionesEstadoEquipoFormulario() {
   if (!modoEdicion.value) {
@@ -1243,14 +1176,14 @@ function abrirModalEditar(servicio) {
     copia.otraMarca = ''
   }
 
-  // Normalizar reparaciones múltiples (retrocompatibilidad)
-  if (!copia.reparaciones || !Array.isArray(copia.reparaciones) || copia.reparaciones.length === 0) {
-    copia.reparaciones = [
-      { tipo: copia.tipoReparacion || null, especificacionOtros: copia.especificacionOtros || '' }
-    ]
-    copia.cantidadReparaciones = 1
+  // Convertir reparaciones a formato nuevo
+  if (copia.reparaciones && Array.isArray(copia.reparaciones)) {
+    copia.tiposReparacion = copia.reparaciones.map(r => r.tipo).filter(Boolean)
+    const otro = copia.reparaciones.find(r => r.tipo === 'otros')
+    copia.especificacionOtros = otro ? otro.especificacionOtros : ''
   } else {
-    copia.cantidadReparaciones = copia.reparaciones.length
+    copia.tiposReparacion = copia.tipoReparacion ? [copia.tipoReparacion] : []
+    copia.especificacionOtros = copia.especificacionOtros || ''
   }
 
   formulario.value = copia
@@ -1282,9 +1215,9 @@ function guardarServicio() {
     }
 
     // Normalizar y limpiar reparaciones
-    const reparacionesFinales = (formulario.value.reparaciones || []).map(r => ({
-      tipo: r.tipo,
-      especificacionOtros: r.tipo === 'otros' ? (r.especificacionOtros || '').trim() : ''
+    const reparacionesFinales = (formulario.value.tiposReparacion || []).map(tipo => ({
+      tipo,
+      especificacionOtros: tipo === 'otros' ? (formulario.value.especificacionOtros || '').trim() : ''
     }))
 
     const primerTipo = reparacionesFinales[0] ? reparacionesFinales[0].tipo : null
@@ -1296,7 +1229,6 @@ function guardarServicio() {
       formulario.value.montoAbonado = 0
     }
 
-<<<<<<< HEAD
     if (!modoEdicion.value) {
       formulario.value.estadoEquipo = 'recibido'
     }
@@ -1304,10 +1236,6 @@ function guardarServicio() {
     const payload = {
       ...formulario.value,
       estadoEquipo: !modoEdicion.value ? 'recibido' : formulario.value.estadoEquipo,
-=======
-    const payload = {
-      ...formulario.value,
->>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
       marca: marcaFinal,
       reparaciones: reparacionesFinales,
       cantidadReparaciones: reparacionesFinales.length,
@@ -1589,11 +1517,7 @@ function mostrarAviso(texto, tipo = 'exito') {
 
 .ribbon-card {
   letter-spacing: 0.5px;
-<<<<<<< HEAD
-  font-size: 12.5px;
-=======
   font-size: 11px;
->>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
 }
 
 /* Mini Stepper de Etapas */
@@ -1619,21 +1543,12 @@ function mostrarAviso(texto, tipo = 'exito') {
 }
 
 .step-dot {
-<<<<<<< HEAD
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background-color: #cbd5e1;
-  color: #ffffff;
-  font-size: 11.5px;
-=======
   width: 20px;
   height: 20px;
   border-radius: 50%;
   background-color: #cbd5e1;
   color: #ffffff;
   font-size: 10px;
->>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -1642,11 +1557,7 @@ function mostrarAviso(texto, tipo = 'exito') {
 }
 
 .step-label {
-<<<<<<< HEAD
-  font-size: 11.5px;
-=======
   font-size: 9.5px;
->>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
   font-weight: 600;
   color: #64748b;
   white-space: nowrap;
@@ -1715,11 +1626,7 @@ function mostrarAviso(texto, tipo = 'exito') {
   border-radius: 50px;
   color: #ffffff;
   font-weight: 600;
-<<<<<<< HEAD
-  font-size: 14.5px;
-=======
   font-size: 13.5px;
->>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
   letter-spacing: 0.2px;
 }
 
@@ -1744,8 +1651,4 @@ function mostrarAviso(texto, tipo = 'exito') {
 }
 
 
-<<<<<<< HEAD
 </style>
-=======
-</style>
->>>>>>> 078137fd541e212dd66f1be4906eb0390b32fa0b
